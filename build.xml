@@ -1,16 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?> 
-<project name="php_test" default="php_test" basedir=".">
-    <property name="output.encoding" value="UTF-8"/>
-    <property name="build.dir"       value="${basedir}"/>
-    <property name="packagedir"      value="packagedir"/>
-    <property name="zip.excludes" value="**/build.xml,**/${packagedir},**/nbproject/**,**/nbproject,**/.**,**/.**/**"/>
-    
-    <target name="php_test" description="测试脚本打包">
-        <property name="version" value="php_test"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="php-ext-lib" default="zip" basedir=".">
+	<property name="output.encoding" value="UTF-8" />
+	<property name="build.dir" value="${basedir}" />
+	<property name="packagedir" value="packagedir" />
+	<property name="php.bin.dir" value="F:/wamp/bin/php/php5.2.6" />
+	<property name="zip.excludes" value="**/build.xml,**/${packagedir},**/nbproject/**,**/nbproject,**/.**,**/.**/**" />
 
-        <delete dir="${build.dir}/${packagedir}"/>
-        <mkdir dir="${basedir}/${packagedir}"/>
-        <zip destfile="${build.dir}/${packagedir}/${version}.zip" basedir="${build.dir}" excludes="${zip.excludes}"/>
-        <echo>build ${version} success</echo> 
-    </target>
+	<target name="zip" depends="unit_testing" description="完整zip包">
+		<property name="version" value="zip" />
+
+		<delete dir="${build.dir}/${packagedir}" />
+		<mkdir dir="${basedir}/${packagedir}" />
+		<zip destfile="${build.dir}/${packagedir}/${version}.zip" basedir="${build.dir}" excludes="${zip.excludes}" />
+		<echo>build ${version} success</echo>
+	</target>
+
+	<target name="unit_testing">
+		<property name="version" value="unit_testing" />
+		
+		<exec executable="${php.bin.dir}/php.exe" failonerror="true">
+			<arg line="Test/test.php"/>
+		</exec>
+	</target>
 </project>
