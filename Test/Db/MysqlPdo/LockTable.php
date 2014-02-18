@@ -1,20 +1,10 @@
 <?php
-require_once '../../../common.php';
 require_once APPLICATION_PATH . '/Library/Db/MysqlPdo.php';
-
-$dbConfigs = array (
-		'host' => '127.0.0.1',
-		'port' => '3306',
-		'username' => 'root',
-		'password' => '',
-		'dbname' => 'test',
-		'charset' => 'UTF8'
-);
-
+global $dbConfigs;//见common.php
 $gDb = Db_MysqlPdo::getInstance ( $dbConfigs );
 
 testLockTable($gDb);
-echo '<hr>';
+// echo '<hr>';
 testTransaction($gDb);
 
 function testLockTable( $gDb ) {
@@ -32,7 +22,7 @@ function testLockTable( $gDb ) {
 		$resultArr = $sthTmp->fetchAll( PDO::FETCH_ASSOC );
 		var_export($resultArr);
 		//测试并发效果
-		sleep(3);
+		sleep(1);
 
 		$sqlTmp = "update test2 set b=:b , c=:c  where a=62";
 		$bTmp = $resultArr[0]['b']-1;
@@ -56,6 +46,7 @@ function testLockTable( $gDb ) {
 		$gDb->execute ($sqlUnLock);
 		echo $e->getTraceAsString(),'<br>';
 		echo $e->__toString(),'<br>';
+		throw $e;
 	}
 }
 
@@ -89,6 +80,7 @@ function testTransaction( $gDb ) {
 		$gDb->rollBack();
 		echo $e->getTraceAsString(),'<br>';
 		echo $e->__toString(),'<br>';
+		throw $e;
 	}
 
 	$sqlTmp = "select * from test order by a desc limit 5";

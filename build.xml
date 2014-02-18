@@ -6,7 +6,7 @@
 	<property name="php.bin.dir" value="F:/wamp/bin/php/php5.2.6" />
 	<property name="zip.excludes" value="**/build.xml,**/${packagedir},**/nbproject/**,**/nbproject,**/.**,**/.**/**" />
 
-	<target name="zip" depends="unit_testing" description="完整zip包">
+	<target name="zip" depends="unit_testing" description="打zip包">
 		<property name="version" value="zip" />
 
 		<delete dir="${build.dir}/${packagedir}" />

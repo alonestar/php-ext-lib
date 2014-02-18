@@ -1,16 +1,6 @@
 <?php
-require_once '../../../common.php';
-require_once APPLICATION_PATH . '/Library/Renn/MysqlPdo.php';
-
-$dbConfigs = array (
-		'host' => '127.0.0.1',
-		'port' => '3306',
-		'username' => 'root',
-		'password' => '',
-		'dbname' => 'test',
-		'charset' => 'UTF8'
-);
-
+require_once APPLICATION_PATH . '/Library/Db/MysqlPdo.php';
+global $dbConfigs;//见common.php
 $gDb = Db_MysqlPdo::getInstance ( $dbConfigs );
 
 if ($_REQUEST ['id'] == 1) {
@@ -20,7 +10,7 @@ if ($_REQUEST ['id'] == 1) {
 } else if ($_REQUEST ['id'] == 3) {
 	testTransaction3 ( $gDb );
 }
-exit ( 'ok!' );
+
 function testTransaction1($gDb) {
 	$sqlTmp = "select * From test3";
 
@@ -29,12 +19,12 @@ function testTransaction1($gDb) {
 		$sthTmp = $gDb->execute ( $sqlTmp );
 		$resultArr = $sthTmp->fetchAll ( PDO::FETCH_ASSOC );
 		var_export ( $resultArr );
-		sleep ( 5 );
+		sleep ( 1 );
 		echo date ( "Y-m-d H:i:s" ) . "<br/>";
 		$sthTmp = $gDb->execute ( $sqlTmp . " for update" );
 		$resultArr = $sthTmp->fetchAll ( PDO::FETCH_ASSOC );
 		var_export ( $resultArr );
-		sleep ( 5 );
+		sleep ( 1 );
 		echo date ( "Y-m-d H:i:s" ) . "<br/>";
 		$sthTmp = $gDb->execute ( $sqlTmp . " for update" );
 		$resultArr = $sthTmp->fetchAll ( PDO::FETCH_ASSOC );
@@ -44,6 +34,7 @@ function testTransaction1($gDb) {
 		$gDb->rollBack ();
 		echo $e->getTraceAsString (), '<br>';
 		echo $e->__toString (), '<br>';
+		throw $e;
 	}
 }
 function testTransaction3($gDb) {
@@ -71,6 +62,7 @@ function testTransaction3($gDb) {
 		$gDb->rollBack ();
 		echo $e->getTraceAsString (), '<br>';
 		echo $e->__toString (), '<br>';
+		throw $e;
 	}
 }
 function testTransaction2($gDb) {
@@ -98,5 +90,6 @@ function testTransaction2($gDb) {
 		$gDb->rollBack ();
 		echo $e->getTraceAsString (), '<br>';
 		echo $e->__toString (), '<br>';
+		throw $e;
 	}
 }
