@@ -16,4 +16,4 @@ php扩展包,对原生扩展的二次封装,更容易使用
     //测试
     ant -f build.xml unit_testing
     //打包
-    ant -f build.xml unit_testing
+    ant -f build.xml zip
