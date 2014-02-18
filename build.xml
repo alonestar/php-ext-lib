@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<project name="php_test" default="php_test" basedir=".">
+    <property name="output.encoding" value="UTF-8"/>
+    <property name="build.dir"       value="${basedir}"/>
+    <property name="packagedir"      value="packagedir"/>
+    <property name="zip.excludes" value="**/build.xml,**/${packagedir},**/nbproject/**,**/nbproject,**/.**,**/.**/**"/>
+    
+    <target name="php_test" description="测试脚本打包">
+        <property name="version" value="php_test"/>
+
+        <delete dir="${build.dir}/${packagedir}"/>
+        <mkdir dir="${basedir}/${packagedir}"/>
+        <zip destfile="${build.dir}/${packagedir}/${version}.zip" basedir="${build.dir}" excludes="${zip.excludes}"/>
+        <echo>build ${version} success</echo> 
+    </target>
+</project>
