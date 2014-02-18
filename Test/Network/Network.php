@@ -12,6 +12,6 @@ $cookie = array (
 );
 
 $result = Network::makeRequest ( $url, $params, $cookie );
-echo 111111111;
-var_export($result);
-
+if ( !$result['result'] ) {
+	throw new Exception('[test Network fail]msg:network invoke fail');
+}

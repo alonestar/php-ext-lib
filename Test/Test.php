@@ -1,5 +1,4 @@
 <?php
-phpinfo();exit;
 require_once dirname ( dirname ( __FILE__ ) ) . '/common.php';
 /**
  * FIXME:需要将本目录下test.sql导入数据库,并配置如下数据库信息
@@ -23,11 +22,15 @@ $testCaseArr = array (
 				'name' => 'test Db_MysqlPdo transaction',
 				'dir' => 'Db/MysqlPdo/Transaction.php'
 		),
-		//cli模式下不支持curl,测试无法成功
-// 		array (
-// 				'name' => 'test Network',
-// 				'dir' => 'Network/Network.php'
-// 		)
+		// cli模式下不支持curl,测试无法成功
+		// array (
+		// 'name' => 'test Network',
+		// 'dir' => 'Network/Network.php'
+		// )
+		array (
+				'name' => 'test Tools_Xml convert array to XML',
+				'dir' => 'Tools/Xml/Xml.php'
+		)
 );
 
 try {
