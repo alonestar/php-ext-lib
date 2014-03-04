@@ -31,10 +31,6 @@ $testCaseArr = array (
 				'name' => 'test Tools_Xml convert array to XML',
 				'dir' => 'Tools/Xml/Xml.php'
 		),
-// 		array (
-// 				'name' => 'test Test_Renn_Sdk_Apps',
-// 				'dir' => 'Renn/Sdk/Apps.php'
-// 		)
 );
 
 try {
