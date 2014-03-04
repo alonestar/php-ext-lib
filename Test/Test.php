@@ -30,7 +30,11 @@ $testCaseArr = array (
 		array (
 				'name' => 'test Tools_Xml convert array to XML',
 				'dir' => 'Tools/Xml/Xml.php'
-		)
+		),
+// 		array (
+// 				'name' => 'test Test_Renn_Sdk_Apps',
+// 				'dir' => 'Renn/Sdk/Apps.php'
+// 		)
 );
 
 try {
@@ -39,5 +43,7 @@ try {
 	}
 	exit ( 'Test Success!' );
 } catch ( Exception $e ) {
+	echo "<pre>";
+	echo $e->getTraceAsString();
 	throw $e;
 }
